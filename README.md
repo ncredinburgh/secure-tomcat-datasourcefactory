@@ -35,10 +35,9 @@ The `SecureDataSourceFactory` extends the [standard Tomcat DataSource](https://t
 * `keyFilename`: Required - if the default `KeyFile` locator is used. The location of the file holding the secret key to be used with the algorithm to decrypt the password.  This file must exist and be readble by the user of the Tomcat process.
 * `keyLocator`: Optional. The locator used to provide the decryption key. Default value is `com.ncr.tomcat.KeyFile`.  Must be a class implementing the `KeyLocator` interface in Tomcat's classpath.
  
-
           
-Example
-------- 
+Examples
+-------- 
 
 These examples are based on the examples given in [Tomcat JNDI Datasource HOW-TO](https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html)
 
@@ -62,4 +61,18 @@ These examples are based on the examples given in [Tomcat JNDI Datasource HOW-TO
       maxActive="20" maxIdle="10" maxWait="-1"
       username="myuser" encryptedPassword="C0iZc6o+6xqr0NggmuTo9gRtfowg0kyM8fqNQEJwAZE="
       algorithm="AES" mode="ECB" padding="PKCS5PADDING"
-      keyLocator="com.example.keyClass"/>          
+      keyLocator="com.example.keyClass"/>     
+
+
+Contributing
+------------
+
+All contributions are welcome. Just fork this repository and send us a merge request.  Just make sure your code meets the following requirements:
+
+* You follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+* All the unit tests pass when running `mvn test`
+
+      
+Credits
+-------
+This project was inspired by an original article on [JDev](www.jdev.it) called ["Encrypting passwords in Tomcat"](https://www.jdev.it/encrypting-passwords-in-tomcat/).   
