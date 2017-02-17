@@ -1,9 +1,8 @@
 package com.ncr.tomcat;
 
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
+import static java.lang.String.format;
+import static javax.crypto.Cipher.DECRYPT_MODE;
 
-import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Properties;
 
@@ -12,7 +11,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * A configurable {@link Decryptor} that allows a given cipher text to be decrypted using a specified algorithm and key file.
- * The decryptor can be configured through the properties provided in the constructor.   The following properties are availabe
+ * The decryptor can be configured through the properties provided in the constructor.   The following properties are available
  * 
  * <dl>
  * 	<dt>algorithm</dt>
@@ -25,43 +24,59 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class ConfigurableDecryptor implements Decryptor {
 
-	public static final String PROPERTY_ALGORITHM = "algorithm";
-	public static final String PROPERTY_MODE = "mode";
-	public static final String PROPERTY_PADDING = "padding";
-	public static final String PROPERTY_KEY_FILE = "keyFilename";
+	public static final String PROP_ALGORITHM = "algorithm";
+	public static final String PROP_MODE = "mode";
+	public static final String PROP_PADDING = "padding";
+	public static final String PROP_KEYLOCATOR = "keyLocator";
+
+	public static final String DEFAULT_KEYLOCATOR = "com.ncr.tomcat.KeyFile";
+	public static final String DEFAULT_MODE = "NONE";
+	public static final String DEFAULT_PADDING = "NoPadding";
 	
 	private String algorithm;
 	private String mode;
 	private String padding;
-	private String keyFilename;
+	private String keyLocatorClass;
+	private KeyLocator keyLocator;
 	
-	public ConfigurableDecryptor(Properties properties) throws DecryptionException {
-		algorithm = properties.getProperty(PROPERTY_ALGORITHM);
-		mode = properties.getProperty(PROPERTY_MODE, "NONE");
-		padding = properties.getProperty(PROPERTY_PADDING, "NoPadding");
-		keyFilename = properties.getProperty(PROPERTY_KEY_FILE);
-		validateProperties();
+	public void configure(Properties properties) throws DecryptionException {
+		algorithm = properties.getProperty(PROP_ALGORITHM);
+		mode = properties.getProperty(PROP_MODE, DEFAULT_MODE);
+		padding = properties.getProperty(PROP_PADDING, DEFAULT_PADDING);
+		keyLocatorClass = properties.getProperty(PROP_KEYLOCATOR, DEFAULT_KEYLOCATOR);
+
+		keyLocator = createLocator(keyLocatorClass);
+		keyLocator.configure(properties);
 	}
 	
-	public String decrypt(String cipherText) throws DecryptionException {
+	public byte[] decrypt(byte[] cipherBytes) throws DecryptionException {
 		try {
+			validate();
 			
-			String transformation = String.format("%s/%s/%s", algorithm, mode, padding);
-	    	SecretKeySpec keySpec = new SecretKeySpec(readAllBytes(get(keyFilename)), algorithm);
+			String transformation = format("%s/%s/%s", algorithm, mode, padding);
+	    	SecretKeySpec keySpec = new SecretKeySpec(keyLocator.locateKey(), algorithm);
 	    	
 			Cipher cipher = Cipher.getInstance(transformation);
-	        cipher.init(Cipher.DECRYPT_MODE, keySpec);
-	        byte[] clearText = cipher.doFinal(cipherText.getBytes());
+	        cipher.init(DECRYPT_MODE, keySpec);
+
+	        return cipher.doFinal(cipherBytes);
 	        
-	        return new String(clearText);
-	        
-		} catch (GeneralSecurityException|IOException e) {
+		} catch (GeneralSecurityException e) {
 			throw new DecryptionException(e);
 		}
 	}
-
-	private void validateProperties() throws DecryptionException {
-		if (keyFilename == null) throw new DecryptionException("No encyption 'keyFilename' specified");
-		if (algorithm == null) throw new DecryptionException("No encyption 'algorithm' specified");		
+	
+	private void validate() throws DecryptionException {
+		if (algorithm == null) {
+			throw new DecryptionException("Property '" + PROP_ALGORITHM +"' not specified");
+		}
+	}
+	
+	private KeyLocator createLocator(String keyLocator) throws DecryptionException {
+		try {
+			return (KeyLocator) Class.forName(keyLocator).newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			throw new DecryptionException(e);
+		}
 	}
 }
