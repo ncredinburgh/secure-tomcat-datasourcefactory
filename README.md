@@ -3,9 +3,10 @@ Secure Tomcat DataSourceFactory
 
 This library provides a drop in replacement for the standard Tomcat DataSourceFactory that allows the database connection password to be encrypted using a symmetric key for the purposes of security.  This datasource uses the standard [Cipher](http://docs.oracle.com/javase/7/docs/api/javax/crypto/Cipher.html) class from Java Cryptography Architecture to perform the decrytion.  As such all the algorithms installed in the JVM are available to use.  By default all JVM vendors must support the [standard algorithms](http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#Cipher). Consult your vendor's documentation for any further algorithm support.   
 
-Usage
------
-* Download the JAR file secure-datasourcefactory.jar
+Basic Usage
+-----------
+* Clone this project
+* Build the project `mvn package`
 * Copy the JAR file to the folder `{TOMCAT_HOME}/lib`
 * Make the following changes to your JNDI datasource in `{TOMCAT_HOME}/context.xml` 
     * Add `factory="com.ncr.tomcat.SecureDataSourceFactory"`
