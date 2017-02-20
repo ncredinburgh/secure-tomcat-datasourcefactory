@@ -4,14 +4,36 @@
 	<groupId>com.ncr.tomcat</groupId>
 	<artifactId>secure-datasourcefactory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>Secure Tomcat DataSource Factory</name>
 	<description>A Tomcat DataSourceFactory that supports an encrypted password</description>
+	<url>https://github.com/NCR-CoDE/secure-datasourcefactory</url>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Grant Forrester</name>
+			<url>https://github.com/grantjforrester</url>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/NCR-CoDE/secure-datasourcefactory.git</connection>
+		<developerConnection>scm:git:ssh://github.com:NCR-CoDE/secure-datasourcefactory.git</developerConnection>
+		<url>https://github.com/NCR-CoDE/secure-datasourcefactory.git</url>
+	</scm>
 
 	<properties>
-    	<maven.compiler.source>1.7</maven.compiler.source>
-    	<maven.compiler.target>1.7</maven.compiler.target>
-  	</properties>
-  
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
@@ -19,12 +41,12 @@
 			<version>7.0.29</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>junit</groupId>
-    		<artifactId>junit</artifactId>
-    		<version>4.12</version>
-    		<scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
