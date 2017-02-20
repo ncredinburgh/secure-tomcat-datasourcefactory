@@ -1,5 +1,8 @@
 package com.ncr.tomcat;
 
+import static com.ncr.tomcat.PasswordHolder.getPassword;
+import static com.ncr.tomcat.PasswordHolder.setPassword;
+import static com.ncr.tomcat.PropertyParser.parseProperties;
 import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 
 import java.util.Properties;
@@ -15,27 +18,37 @@ import org.apache.tomcat.jdbc.pool.DataSourceFactory;
  * called <code>encryptedPassword</code> and decrypt it using a {@link ConfigurableDecryptor} object.
  */
 public class SecureDataSourceFactory extends DataSourceFactory {
-
-	public String PROP_ENCRYTPEDPASSWORD = "encryptedPasswoed";
-	
+		
 	private Decryptor decryptor = new ConfigurableDecryptor();
 			
 	@Override
 	public DataSource createDataSource(Properties properties, Context context, boolean XA) throws Exception {
-		if (!properties.containsKey(PROP_PASSWORD)) {
-			decryptPassword(properties);
-		}
+		validate(properties);
+		replacePassword(properties);
 		
 		return super.createDataSource(properties, context, XA);
 	}
-	
-	private void decryptPassword(Properties properties) throws DecryptionException {
-		String cipherPassword = properties.getProperty(PROP_ENCRYTPEDPASSWORD);
-		byte[] cipherBytes = parseBase64Binary(cipherPassword);
-		
-		decryptor.configure(properties);
-		String clearPassword = new String(decryptor.decrypt(cipherBytes));
-		
-		properties.setProperty(PROP_PASSWORD, clearPassword);
+
+	private void replacePassword(Properties properties) throws DecryptionException {
+		if (getPassword() == null) {
+			setPassword(decryptPassword(properties));
+		}
+		properties.setProperty(PROP_PASSWORD, getPassword());
 	}
+	
+	private String decryptPassword(Properties properties) throws DecryptionException {
+		byte[] cipherBytes = parseBase64Binary(properties.getProperty(PROP_PASSWORD));
+		decryptor.configure(parseProperties(properties.getProperty(PROP_CONNECTIONPROPERTIES)));
+		return new String(decryptor.decrypt(cipherBytes));
+	}
+	
+	private void validate(Properties properties) throws DecryptionException {
+		if (!properties.containsKey(PROP_PASSWORD)) {
+			throw new DecryptionException("Property '" + PROP_PASSWORD +"' not specified");
+		}
+		if (!properties.containsKey(PROP_CONNECTIONPROPERTIES)) {
+			throw new DecryptionException("Property '" + PROP_CONNECTIONPROPERTIES +"' not specified");
+		}
+	}
+	
 }

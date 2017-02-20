@@ -39,20 +39,20 @@ public class EncryptionTool {
 	public static void main(String[] args) throws Exception {
 		//DES/CBC/PKCS5Padding (56)
 		System.out.println("Generating key...");
-		byte[] keyBytes = generateKeyBytes("DES", 56);
+		byte[] keyBytes = generateKeyBytes("AES", 128);
 		System.out.println("Generated key (Base64): " + printBase64Binary(keyBytes));
 		
-		File keyFile = new File("src/test/resources/com/ncr/tomcat/Example-DES-56.key");
+		File keyFile = new File("./AES-128.key");
 		System.out.println("Writing new key to file: " + keyFile.getCanonicalPath());
 		Files.write(keyFile.toPath(), keyBytes);
 		
-		String clearPassword = "Sup3rS3cr3tP455w0rd";
+		String clearPassword = "password";
 		System.out.println("Clear-text password: " + clearPassword);
 
 		System.out.println("Encrypting password...");
-		byte[] cipherBytes = encryptPassword(clearPassword, "DES", "ECB", "PKCS5PADDING", keyFile);
+		byte[] cipherBytes = encryptPassword(clearPassword, "AES", "ECB", "PKCS5PADDING", keyFile);
 		
-		File passwordFile = new File("src/test/resources/com/ncr/tomcat/Example-DES-56.password");
+		File passwordFile = new File("./AES-128.password");
 		System.out.println("Writing encrypted password to file: " + passwordFile.getCanonicalPath());
 		Files.write(passwordFile.toPath(), cipherBytes);
 		
