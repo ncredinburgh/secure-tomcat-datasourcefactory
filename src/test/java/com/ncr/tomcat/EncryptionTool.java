@@ -15,6 +15,12 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionTool {
 	
+	private static final String ALGORITHM = "AES";
+	private static final int KEY_SIZE = 128;
+	private static final String MODE = "ECB";
+	private static final String PADDING = "PKCS5PADDING";
+	private static final String CLEAR_PASSWORD = "mysecretpassword";
+	
 	public static byte[] generateKeyBytes(String algorithm, int keySize) throws NoSuchAlgorithmException {
 		KeyGenerator generator = KeyGenerator.getInstance(algorithm);
 		generator.init(keySize);
@@ -39,20 +45,19 @@ public class EncryptionTool {
 	public static void main(String[] args) throws Exception {
 		//DES/CBC/PKCS5Padding (56)
 		System.out.println("Generating key...");
-		byte[] keyBytes = generateKeyBytes("AES", 128);
+		byte[] keyBytes = generateKeyBytes(ALGORITHM, KEY_SIZE);
 		System.out.println("Generated key (Base64): " + printBase64Binary(keyBytes));
 		
-		File keyFile = new File("./AES-128.key");
+		File keyFile = new File(format("./%s-%d.key", ALGORITHM, KEY_SIZE));
 		System.out.println("Writing new key to file: " + keyFile.getCanonicalPath());
 		Files.write(keyFile.toPath(), keyBytes);
 		
-		String clearPassword = "password";
-		System.out.println("Clear-text password: " + clearPassword);
+		System.out.println("Clear-text password: " + CLEAR_PASSWORD);
 
 		System.out.println("Encrypting password...");
-		byte[] cipherBytes = encryptPassword(clearPassword, "AES", "ECB", "PKCS5PADDING", keyFile);
+		byte[] cipherBytes = encryptPassword(CLEAR_PASSWORD, ALGORITHM, MODE, PADDING, keyFile);
 		
-		File passwordFile = new File("./AES-128.password");
+		File passwordFile = new File(format("./%s-%d.password", ALGORITHM, KEY_SIZE));
 		System.out.println("Writing encrypted password to file: " + passwordFile.getCanonicalPath());
 		Files.write(passwordFile.toPath(), cipherBytes);
 		
