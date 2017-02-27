@@ -1,8 +1,12 @@
-
 Secure Tomcat DataSourceFactory
 ===============================
 
-This library provides a drop in replacement for the standard Tomcat DataSourceFactory that allows the database connection password to be encrypted using a symmetric key for the purposes of security.  This datasource uses the standard [Cipher](http://docs.oracle.com/javase/7/docs/api/javax/crypto/Cipher.html) class from Java Cryptography Architecture to perform the decrytion.  As such all the algorithms installed in the JVM are available to use.  By default all JVM vendors must support the [standard algorithms](http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#Cipher). Consult your vendor's documentation for any further algorithm support.   
+This library provides a drop in replacement for the standard Tomcat DataSourceFactory that allows the database connection password to be encrypted using a symmetric key for the purposes of security.  This datasource uses the standard [Cipher](http://docs.oracle.com/javase/7/docs/api/javax/crypto/Cipher.html) class from Java Cryptography Architecture to perform the decrytion.  As such all the algorithms installed in the JVM are available to use.  By default all JVM vendors must support the [standard algorithms](http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#Cipher). Consult your vendor's documentation for any further algorithm support.
+
+The secure Tomcat DataSourceFactory can be tested using the GitHub project [secure-datasourcefactory-test](https://github.com/grantjforrester/secure-datasourcefactory-test). The following databases have been tested:
+
+* Postgres 9.6
+* Oracle 12c    
 
 
 Basic Usage
