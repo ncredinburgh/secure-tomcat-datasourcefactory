@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ncredinburgh/secure-datasourcefactory.svg?branch=master)](https://travis-ci.org/ncredinburgh/secure-datasourcefactory)
+
 Secure Tomcat DataSourceFactory
 ===============================
 
