@@ -17,7 +17,7 @@ Basic Usage
 * Build the project `mvn package`
 * Copy the JAR file to the folder `{TOMCAT_HOME}/lib`
 * Make the following changes to your JNDI datasource in `{TOMCAT_HOME}/context.xml` 
-    * Add `factory="com.ncr.tomcat.SecureDataSourceFactory"`
+    * Add `factory="com.github.ncredinburgh.tomcat.SecureDataSourceFactory"`
     * Replace existing `password` with [Base64](https://en.wikipedia.org/wiki/Base64) encoded encrypted password e.g. `password="C0iZc6o+6xqr0NggmuTo9gRtfowg0kyM8fqNQEJwAZE="`
     * Add algorithm details to `connectionProperties` e.g. `algorithm=AES;mode=ECB;padding=PKCS5PADDING`
     * Add location of keyfile to `connectionProperties` e.g.`keyFilename=/some/super/secure/location/keyfile`
@@ -42,7 +42,7 @@ The `SecureDataSourceFactory` extends the [standard Tomcat DataSource](https://t
 * `mode`: Optional. The mode of the algorithm (where appropriate) to decrypt the password. Default value is `NONE`. For valid options consult the algorithm documentation.
 * `padding`:  Optional. The padding used with the algorithm (where appropriate) to decrypt the password. Default value is `NoPadding`. For valid options consult the algorithm documentation.
 * `keyFilename`: Required - if the default `KeyFile` locator is used. The location of the file holding the secret key to be used with the algorithm to decrypt the password.  This file must exist and be readble by the user of the Tomcat process.
-* `keyLocator`: Optional. The locator used to provide the decryption key. Default value is `com.ncr.tomcat.KeyFile`.  Must be a class implementing the `KeyLocator` interface in Tomcat's classpath.
+* `keyLocator`: Optional. The locator used to provide the decryption key. Default value is `com.github.ncredinburgh.tomcat.KeyFile`.  Must be a class implementing the `KeyLocator` interface in Tomcat's classpath.
 
 
 
@@ -54,7 +54,7 @@ These examples are based on the examples given in [Tomcat JNDI Datasource HOW-TO
 ### Oracle datasource using keyfile  
 
 	<Resource name="jdbc/myoracle" auth="Container"
-	  factory="com.ncr.tomcat.SecureDataSourceFactory"
+	  factory="com.github.ncredinburgh.tomcat.SecureDataSourceFactory"
 	  type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
 	  url="jdbc:oracle:thin:@127.0.0.1:1521:mysid"
 	  maxActive="20" maxIdle="10" maxWait="-1"
@@ -64,7 +64,7 @@ These examples are based on the examples given in [Tomcat JNDI Datasource HOW-TO
 ### Postgres datasource using compiled key
 
     <Resource name="jdbc/postgres" auth="Container"
-      factory="com.ncr.tomcat.SecureDataSourceFactory"
+      factory="com.github.ncredinburgh.tomcat.SecureDataSourceFactory"
       type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
       url="jdbc:postgresql://127.0.0.1:5432/mydb"
       maxActive="20" maxIdle="10" maxWait="-1"
