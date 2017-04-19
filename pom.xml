@@ -25,8 +25,8 @@
 
 	<scm>
 		<connection>scm:git:git://github.com/NCR-CoDE/secure-tomcat-datasourcefactory.git</connection>
-		<developerConnection>scm:git:ssh://github.com:NCR-CoDE/secure-tomcat-datasourcefactory.git</developerConnection>
-		<url>https://github.com/NCR-CoDE/secure-tomcat-datasourcefactory.git</url>
+		<developerConnection>scm:git:ssh://github.com/ncredinburgh/secure-tomcat-datasourcefactory.git</developerConnection>
+		<url>https://github.com/ncredinburgh/secure-tomcat-datasourcefactory.git</url>
 	</scm>
 
 	<distributionManagement>
