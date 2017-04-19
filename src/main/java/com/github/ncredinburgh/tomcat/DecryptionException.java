@@ -1,4 +1,4 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 public class DecryptionException extends Exception {
 

@@ -1,4 +1,4 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 import java.io.IOException;
 import java.io.Reader;

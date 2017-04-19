@@ -1,4 +1,4 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;

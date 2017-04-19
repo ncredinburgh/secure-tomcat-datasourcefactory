@@ -1,4 +1,4 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 import static java.lang.String.format;
 import static javax.crypto.Cipher.ENCRYPT_MODE;

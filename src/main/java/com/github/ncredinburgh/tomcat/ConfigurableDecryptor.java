@@ -1,4 +1,4 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 import static java.lang.String.format;
 import static javax.crypto.Cipher.DECRYPT_MODE;
@@ -29,7 +29,7 @@ public class ConfigurableDecryptor implements Decryptor {
 	public static final String PROP_PADDING = "padding";
 	public static final String PROP_KEYLOCATOR = "keyLocator";
 
-	public static final String DEFAULT_KEYLOCATOR = "com.ncr.tomcat.KeyFile";
+	public static final String DEFAULT_KEYLOCATOR = "com.github.ncredinburgh.tomcat.KeyFile";
 	public static final String DEFAULT_MODE = "NONE";
 	public static final String DEFAULT_PADDING = "NoPadding";
 	

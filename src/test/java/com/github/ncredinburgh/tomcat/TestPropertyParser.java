@@ -1,4 +1,4 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -6,6 +6,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.Properties;
 
 import org.junit.Test;
+
+import com.github.ncredinburgh.tomcat.PropertyParser;
 
 public class TestPropertyParser {
 

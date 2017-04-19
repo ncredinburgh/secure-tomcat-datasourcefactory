@@ -1,8 +1,8 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
-import static com.ncr.tomcat.PasswordHolder.getPassword;
-import static com.ncr.tomcat.PasswordHolder.setPassword;
-import static com.ncr.tomcat.PropertyParser.parseProperties;
+import static com.github.ncredinburgh.tomcat.PasswordHolder.getPassword;
+import static com.github.ncredinburgh.tomcat.PasswordHolder.setPassword;
+import static com.github.ncredinburgh.tomcat.PropertyParser.parseProperties;
 import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 
 import java.util.Properties;

@@ -1,8 +1,11 @@
-package com.ncr.tomcat;
+package com.github.ncredinburgh.tomcat;
 
 import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 
 import java.util.Properties;
+
+import com.github.ncredinburgh.tomcat.DecryptionException;
+import com.github.ncredinburgh.tomcat.KeyLocator;
 
 public class DES56CompiledKey implements KeyLocator {
 
