@@ -14,8 +14,7 @@ The secure Tomcat DataSourceFactory can be tested using the GitHub project [secu
 
 Basic Usage
 -----------
-* Clone this project
-* Build the project `mvn package`
+* Download the latest version of the library using the link in the Maven Central badge at the top of this page.   
 * Copy the JAR file to the folder `{TOMCAT_HOME}/lib`
 * Make the following changes to your JNDI datasource in `{TOMCAT_HOME}/context.xml` 
     * Add `factory="com.github.ncredinburgh.tomcat.SecureDataSourceFactory"`
