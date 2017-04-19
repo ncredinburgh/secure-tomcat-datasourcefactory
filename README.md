@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ncredinburgh/secure-tomcat-datasourcefactory.svg?branch=master)](https://travis-ci.org/ncredinburgh/secure-tomcat-datasourcefactory)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ncredinburgh/secure-tomcat-datasourcefactory/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.ncredinburgh/secure-tomcat-datasourcefactory)
 
 Secure Tomcat DataSourceFactory
 ===============================
