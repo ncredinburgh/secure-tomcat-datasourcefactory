@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.ncredinburgh.tomcat</groupId>
-	<artifactId>secure-datasourcefactory</artifactId>
+	<groupId>com.github.ncredinburgh</groupId>
+	<artifactId>secure-tomcat-datasourcefactory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Secure Tomcat DataSource Factory</name>
 	<description>A Tomcat DataSourceFactory that supports an encrypted password</description>
-	<url>https://github.com/NCR-CoDE/secure-datasourcefactory</url>
+	<url>https://github.com/NCR-CoDE/secure-tomcat-datasourcefactory</url>
 
 	<licenses>
 		<license>
@@ -24,9 +24,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/NCR-CoDE/secure-datasourcefactory.git</connection>
-		<developerConnection>scm:git:ssh://github.com:NCR-CoDE/secure-datasourcefactory.git</developerConnection>
-		<url>https://github.com/NCR-CoDE/secure-datasourcefactory.git</url>
+		<connection>scm:git:git://github.com/NCR-CoDE/secure-tomcat-datasourcefactory.git</connection>
+		<developerConnection>scm:git:ssh://github.com:NCR-CoDE/secure-tomcat-datasourcefactory.git</developerConnection>
+		<url>https://github.com/NCR-CoDE/secure-tomcat-datasourcefactory.git</url>
 	</scm>
 
 	<distributionManagement>
