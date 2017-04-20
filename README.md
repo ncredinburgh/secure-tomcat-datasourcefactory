@@ -34,7 +34,7 @@ The `SecureDataSourceFactory` extends the [standard Tomcat DataSource](https://t
 * `keyFilename`: Required*. The location of the file holding the secret key to be used with the algorithm to decrypt the password.  This file must exist and be readable by the user of the Tomcat process.
 * `keyLocator`: Optional. The locator used to provide the decryption key. Default value is `com.github.ncredinburgh.tomcat.KeyFile`.  Must be a class implementing the `KeyLocator` interface in Tomcat's classpath. See "Alternative KeySources" section below.
 
-\* Only required if default key locator `KeyFile` is being used  is used. See "Alternative Key Sources" section below.
+\* Only required if the default key locator `KeyFile` is being used  is used. See "Alternative Key Sources" section below.
 
 
 Examples
