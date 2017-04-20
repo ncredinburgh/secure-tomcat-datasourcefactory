@@ -24,13 +24,6 @@ Basic Usage
 * Congratulations your done!  
 
 
-Alternative Key Sources
------------------------
-By default the `SecureDataSourceFactory` expects to locate the decryption key in a file. This is because, by default, the decryptor is configured with a *key locator* of type `KeyFile`.  The `KeyFile` locator requires the path to the key file in the property `keyFilename`.
-
-Alternative key locator implementations can be used by specifying the name of a *key locator* class in the property `keyLocator`.  To use your own key locator create a class that implements the `KeyLocator` interface and make sure it is in a JAR file in `{TOMCAT_HOME}/lib`.  See Security Advice   
-
-
 Reference
 ---------
 The `SecureDataSourceFactory` extends the [standard Tomcat DataSource](https://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/tomcat/jdbc/pool/DataSourceFactory.html) and is configured using the DataSource property `connectionProperties` with the following values :
@@ -38,9 +31,10 @@ The `SecureDataSourceFactory` extends the [standard Tomcat DataSource](https://t
 * `algorithm`: Required - if `encryptedPassword` is used. The name of the algorithm used to decrypt the password. Must be the name of one of the algorithm installed in the JVM using the Java Cryptography Architecture.
 * `mode`: Optional. The mode of the algorithm (where appropriate) to decrypt the password. Default value is `NONE`. For valid options consult the algorithm documentation.
 * `padding`:  Optional. The padding used with the algorithm (where appropriate) to decrypt the password. Default value is `NoPadding`. For valid options consult the algorithm documentation.
-* `keyFilename`: Required - if the default `KeyFile` locator is used. The location of the file holding the secret key to be used with the algorithm to decrypt the password.  This file must exist and be readble by the user of the Tomcat process.
-* `keyLocator`: Optional. The locator used to provide the decryption key. Default value is `com.github.ncredinburgh.tomcat.KeyFile`.  Must be a class implementing the `KeyLocator` interface in Tomcat's classpath. See "Building Your Own KeyLocator" section below.
+* `keyFilename`: Required*. The location of the file holding the secret key to be used with the algorithm to decrypt the password.  This file must exist and be readable by the user of the Tomcat process.
+* `keyLocator`: Optional. The locator used to provide the decryption key. Default value is `com.github.ncredinburgh.tomcat.KeyFile`.  Must be a class implementing the `KeyLocator` interface in Tomcat's classpath. See "Alternative KeySources" section below.
 
+\* - Only required if the default `keyLocator` is used. See "Alternative Key Sources" section below.
 
 
 Examples
@@ -74,7 +68,13 @@ Encrypting a password and storing the secret key on the same server doesn't impr
 
 The range of solutions to this problem is outwith the scope of this discussion but if you want to use the default `KeyFile` implementation of the `KeyLocator` a more secure approach would be to ensure that the key file is *only* present when Tomcat *starts*.  This could be achieved through storing the key file on a temporary filesystem that is only mounted during Tomcat startup - either physically through a USB memory stick or logically through a remote filesystem. After Tomcat startup is complete the filesystem is unmounted and the key is no longer available to the malicious user.  The decrypted key is maintained only in the memory of the running Tomcat server.
 
+
+Alternative Key Sources
+-----------------------
+By default the `SecureDataSourceFactory` expects to locate the decryption key in a file. This is because, by default, the decryptor is configured with a *key locator* of type `KeyFile`.  The `KeyFile` locator requires the path to the key file in the property `keyFilename`.
+
 Other more sophisticated implementations of `KeyLocator` can be written to interface with more advanced secret stores that offer features like one time use passwords and time limited access.
+
 
 Building Your Own KeyLocator
 ----------------------------
