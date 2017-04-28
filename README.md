@@ -110,7 +110,7 @@ All contributions are welcome. Just fork this repository and send us a merge req
 
 Credits
 -------
-This project was inspired by an original article on [JDev](www.jdev.it) called ["Encrypting passwords in Tomcat"](https://www.jdev.it/encrypting-passwords-in-tomcat/).   
+This project was inspired by an original article on [JDev](https://www.jdev.it) called ["Encrypting passwords in Tomcat"](https://www.jdev.it/encrypting-passwords-in-tomcat/).   
 
 
 Releases
