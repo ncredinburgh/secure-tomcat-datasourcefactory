@@ -14,8 +14,8 @@ import org.apache.tomcat.jdbc.pool.DataSourceFactory;
 
 /**
  * A {@link DataSourceFactory} that supports an encrypted password.
- * If the data source configuration does not contain a <code>password</code> property the data source will look for a property 
- * called <code>encryptedPassword</code> and decrypt it using a {@link ConfigurableDecryptor} object.
+ * The datasource assumes that the <code>password</code> property contains an encrypted password and 
+ * decrypts it using the configured {@link ConfigurableDecryptor}.
  */
 public class SecureDataSourceFactory extends DataSourceFactory {
 		
