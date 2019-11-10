@@ -2,3 +2,7 @@
 /.classpath
 /.project
 /.settings/
+/.idea/
+
+# Maven shade plugin temporary files
+dependency-reduced-pom.xml
